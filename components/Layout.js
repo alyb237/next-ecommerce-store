@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { Link } from 'next/link';
+import Link from 'next/link';
 
 const headerStyles = css`
   padding: 8px 12px;
@@ -17,11 +17,12 @@ const headerStyles = css`
 
 const footerStyles = css`
   padding: 8px 12px;
+  margin-top: 30px;
   background: lightgrey;
   border-radius: 4px;
   display: flex;
   align-items: space-between;
-  justify-content: flex-end;
+  justify-content: center;
 `;
 
 export default function Layout(props) {
@@ -31,6 +32,7 @@ export default function Layout(props) {
         <div>
           <Link href="/">Home</Link>
           <Link href="/info">Info</Link>
+          <Link href="/synths">Synths</Link>
           <Link href="/shop">Shop</Link>
         </div>
       </header>
