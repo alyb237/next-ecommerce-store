@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import Head from 'next/head';
+import Link from 'next/link';
 import { synthsDatabase } from '../util/database';
 
 const synthsListStyles = css`
@@ -35,7 +36,9 @@ export default function Synth(props) {
           return (
             <div key={`synths-${synth.id}`} css={synthListItemStyles}>
               <div>Brand: {synth.brand}</div>
-              <div>Name: {synth.name}</div>
+              <div>
+                Name: <Link href={`/synths/${synth.id}`}>{synth.name}</Link>
+              </div>
               <div>Year: {synth.year}</div>
               <div>Price: {synth.price}</div>
             </div>

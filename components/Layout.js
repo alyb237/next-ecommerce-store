@@ -17,7 +17,7 @@ const headerStyles = css`
 
 const footerStyles = css`
   padding: 8px 12px;
-  margin-top: 30px;
+  margin-top: 0px;
   background: lightgrey;
   border-radius: 4px;
   display: flex;
