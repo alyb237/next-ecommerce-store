@@ -7,7 +7,7 @@ const headerStyles = css`
   border-radius: 4px;
   display: flex;
   align-items: space-between;
-  justify-content: flex-end;
+  justify-content: center;
 
   > div > a {
     margin-left: 10px;
@@ -25,19 +25,33 @@ const footerStyles = css`
   justify-content: center;
 `;
 
+const footerDivStyles = css`
+  display: flex;
+  min-height: 20vh;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+const footerContainer = css`
+  margin-top: auto;
+`;
+
 export default function Layout(props) {
   return (
     <div>
-      <header css={headerStyles}>
+      <header data-test-id="products-link" css={headerStyles}>
         <div>
           <Link href="/">Home</Link>
-          <Link href="/info">Info</Link>
           <Link href="/synths">Synths</Link>
-          <Link href="/shop">Shop</Link>
+          <Link href="/cart">Cart</Link>
         </div>
       </header>
       {props.children}
-      <footer css={footerStyles}>Footer</footer>
+      <div css={footerDivStyles}>
+        <div css={footerContainer}>
+          <footer css={footerStyles}>Footer</footer>
+        </div>
+      </div>
     </div>
   );
 }

@@ -21,6 +21,16 @@ const synthListItemStyles = css`
   margin: 5px;
 `;
 
+const titleSynthStyles = css`
+  display: flex;
+  justify-content: center;
+`;
+
+const buttonInputStyles = css`
+  display: flex;
+  justify-content: space-between;
+`;
+
 export default function Synth(props) {
   return (
     <div>
@@ -29,18 +39,25 @@ export default function Synth(props) {
         <meta name="description" content="List of used synthesizers" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <h1>List of Used Synthesizers</h1>
+
+      <div css={titleSynthStyles}>
+        <h1>List of Used Synthesizers</h1>
+      </div>
 
       <div css={synthsListStyles}>
         {props.synths.map((synth) => {
           return (
-            <div key={`synths-${synth.id}`} css={synthListItemStyles}>
+            <div
+              data-test-id={`product-${synth.id}`}
+              key={`products-${synth.id}`}
+              css={synthListItemStyles}
+            >
               <div>Brand: {synth.brand}</div>
               <div>
                 Name: <Link href={`/synths/${synth.id}`}>{synth.name}</Link>
               </div>
               <div>Year: {synth.year}</div>
-              <div>Price: {synth.price}</div>
+              <div data-test-id="product-price">Price: {synth.price}</div>
             </div>
           );
         })}

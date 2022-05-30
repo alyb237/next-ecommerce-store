@@ -10,7 +10,7 @@ export const synthsDatabase = [
     brand: 'Sequential',
     name: 'Prophet-5',
     year: '1977',
-    price: '4000',
+    price: '$4,000',
   },
   { id: '5', brand: 'PPG', name: 'Wave-2', year: '1981', price: '$18,000' },
   { id: '6', brand: 'Roland', name: 'TR-606', year: '1981', price: '$700' },
