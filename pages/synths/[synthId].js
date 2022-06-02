@@ -1,13 +1,14 @@
 // import { useRouter } from 'next/router';
 // useRouter is slow its only good in the front end
 
-import Cookies from 'js-cookie';
+// import Cookies from 'js-cookie';
 import Image from 'next/image';
 import { useState } from 'react';
 import { getParsedCookie, setStringifiedCookie } from '../../util/cookies';
 import { synthsDatabase } from '../../util/database';
 
 // [synthId] becomes the variable that will be accessible
+
 export default function Synth(props) {
   const [isQuantity, setIsQuantity] = useState(1);
   console.log(isQuantity);
@@ -50,7 +51,7 @@ export default function Synth(props) {
           const currentCart = getParsedCookie('cart')
             ? getParsedCookie('cart')
             : [];
-          console.log('the cart is: ', currentCart);
+
           const currentSynthInCart = currentCart.find(
             (synthInCart) => props.synth.id === synthInCart.id,
           );
@@ -83,13 +84,8 @@ export default function Synth(props) {
     </div>
   );
 }
-
 export function getServerSideProps(context) {
   // synthId comes from the url
-  // const synthId = context.query.synthId;
-  // const synths = synthsDatabase.find((synth) => {
-  //   return synth.id === synthId;
-  // });
 
   // 1. get the value of the cookie from the request object ..sometimes it's undefined or empty array
   const currentCart = JSON.parse(context.req.cookies.cart || '[]');

@@ -1,5 +1,16 @@
-// simulate a Node.js server-side dependency
-// to make the file fail is used in frontend
+import { config } from 'dotenv-safe';
+import postgres from 'postgres';
+
+config();
+
+const sql = postgres();
+
+// console.log(
+//   await sql`
+//   SELECT * FROM synths`,
+// );
+
+// await sql.end();
 
 export const synthsDatabase = [
   {
@@ -7,7 +18,7 @@ export const synthsDatabase = [
     brand: 'Korg',
     name: 'MS-20',
     year: '1978',
-    price: '$400',
+    price: '400',
     quantity: '10',
   },
   {
@@ -15,7 +26,7 @@ export const synthsDatabase = [
     brand: 'Roland',
     name: 'CR-78',
     year: '1978',
-    price: '$2,000',
+    price: '2,000',
     quantity: '5',
   },
   {
@@ -23,7 +34,7 @@ export const synthsDatabase = [
     brand: 'Moog',
     name: 'Minimoog-D',
     year: '1980',
-    price: '$9,000',
+    price: '9,000',
     quantity: '3',
   },
   {
@@ -31,7 +42,7 @@ export const synthsDatabase = [
     brand: 'Sequential',
     name: 'Prophet-5',
     year: '1977',
-    price: '$4,000',
+    price: '4,000',
     quantity: '4',
   },
   {
@@ -39,7 +50,7 @@ export const synthsDatabase = [
     brand: 'PPG',
     name: 'Wave-2',
     year: '1981',
-    price: '$18,000',
+    price: '18,000',
     quantity: '2',
   },
   {
@@ -47,7 +58,7 @@ export const synthsDatabase = [
     brand: 'Roland',
     name: 'TR-606',
     year: '1981',
-    price: '$700',
+    price: '700',
     quantity: '7',
   },
 ];
