@@ -5,19 +5,19 @@
 CREATE TABLE synths
 ( id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
 brand varchar(40) NOT NULL,
-name varchar(40) NOT NULL,
+firstName varchar(40) NOT NULL,
 year varchar(20) NOT NULL,
 price integer NOT NULL,
 quantity integer NOT NULL);
 
 
 SELECT * FROM synths;
-
-INSERT INTO synths (brand, name, year, price, quantity)
+--insert some synhts into table
+INSERT INTO synths (brand, firstName, year, price, quantity)
 VALUES
 ('Korg', 'MS-20', '1978', 400, 10),
 ('Roland', 'CR-78', '1978', 2000, 5),
-('Moog', 'Minimoog-D', '1980', 9000, ),
+('Moog', 'Minimoog-D', '1980', 9000, 3),
 ('Sequential', 'Prophet-5', '1977', 4000, 4),
 ('PPG', 'Wave-2', '1981', 18000, 2),
 ('Roland', 'TR-606', '1981', 700, 7)
