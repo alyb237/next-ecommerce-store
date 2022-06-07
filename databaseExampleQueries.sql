@@ -12,8 +12,8 @@ quantity integer NOT NULL);
 
 
 SELECT * FROM synths;
---insert some synhts into table
-INSERT INTO synths (brand, firstName, year, price, quantity)
+--insert some synths into table
+INSERT INTO synths (brand, synth_name, year, price, quantity)
 VALUES
 ('Korg', 'MS-20', '1978', 400, 10),
 ('Roland', 'CR-78', '1978', 2000, 5),

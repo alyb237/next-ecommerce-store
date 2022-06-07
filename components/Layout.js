@@ -15,26 +15,26 @@ const headerStyles = css`
   }
 `;
 
-const footerStyles = css`
-  padding: 8px 12px;
-  margin-top: 0px;
-  background: lightgrey;
-  border-radius: 4px;
-  display: flex;
-  align-items: space-between;
-  justify-content: center;
-`;
+// const footerStyles = css`
+//   padding: 8px 12px;
+//   margin-top: 0px;
+//   background: lightgrey;
+//   border-radius: 4px;
+//   display: flex;
+//   align-items: space-between;
+//   justify-content: center;
+// `;
 
-const footerDivStyles = css`
-  display: flex;
-  min-height: 20vh;
-  flex-direction: column;
-  justify-content: space-between;
-`;
+// const footerDivStyles = css`
+//   display: flex;
+//   min-height: 20vh;
+//   flex-direction: column;
+//   justify-content: space-between;
+// `;
 
-const footerContainer = css`
-  margin-top: auto;
-`;
+// const footerContainer = css`
+//   margin-top: auto;
+// `;
 
 export default function Layout(props) {
   return (
@@ -43,15 +43,15 @@ export default function Layout(props) {
         <div>
           <Link href="/">Home</Link>
           <Link href="/synths">Synths</Link>
-          <Link href="/cart">Cart</Link>
+          <Link href="/cart">Cart 🛒 0</Link>{' '}
         </div>
       </header>
       {props.children}
-      <div css={footerDivStyles}>
+      {/* <div css={footerDivStyles}>
         <div css={footerContainer}>
           <footer css={footerStyles}>Footer</footer>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
