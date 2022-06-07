@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import Head from 'next/head';
 // import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { getParsedCookie, setStringifiedCookie } from '../util/cookies';
 import { getSynths } from '../util/database';
 
@@ -24,10 +24,11 @@ const itemPrice = css``;
 
 export default function Cart(props) {
   const [calculate, setCalculate] = useState(props.foundSynths);
+  console.log(calculate);
 
-  const totalCounting = props.foundSynths.map((synth) => {
+  const totalCounting = calculate.map((synth) => {
     const synthPrice = Number(synth.price);
-    const synthCounter = Number(synth.synthCounter);
+    const synthCounter = Number(synth.quantity);
     const synthPriceTotal = synthPrice * synthCounter;
     return synthPriceTotal;
   });
@@ -38,9 +39,9 @@ export default function Cart(props) {
 
   const sum = totalCounting.reduce(add, 0);
 
-  useEffect(() => {
-    setCalculate(sum);
-  }, [sum]);
+  // useEffect(() => {
+  //   setCalculate(sum);
+  // }, [sum]);
 
   return (
     <div>
@@ -49,13 +50,16 @@ export default function Cart(props) {
         <meta name="description" content="cart" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
+      sum : {sum}
       <div css={contentMain}>
         {calculate.length === 0 ? (
           <h1>Cart is empty!</h1>
         ) : (
           <div css={synthInCartParent}>
-            {props.foundSynths.map((synth) => {
+            {calculate.map((synth) => {
+              const synthPrice = Number(synth.price);
+              const synthCounter = Number(synth.quantity);
+              const synthPriceTotal = synthPrice * synthCounter;
               return (
                 <div key={`synthCart-${synth.id}`}>
                   <div css={productInfo}>
@@ -66,8 +70,8 @@ export default function Cart(props) {
                     </Link>
                     <p css={itemName}>{synth.name}</p>
                     <p css={itemBrand}>{synth.brand}</p>
-                    <p css={itemQuantity}>{synth.quantity}</p>
-                    <p css={itemPrice}>{synth.price}</p>
+                    <p css={itemPrice}>{synth.quantity}</p>
+                    <p css={itemQuantity}>{synthPriceTotal}</p>
 
                     <div css={quantityButtonParent}>
                       <button
@@ -76,7 +80,7 @@ export default function Cart(props) {
                           const newQuantity =
                             synth.quantity > 1 ? synth.quantity - 1 : 1;
 
-                          const updatedArray = props.foundSynths.map((total) =>
+                          const updatedArray = calculate.map((total) =>
                             total.id === synth.id
                               ? { ...total, quantity: newQuantity }
                               : total,
@@ -106,7 +110,7 @@ export default function Cart(props) {
                         css={quantityButton}
                         onClick={() => {
                           const newQuantity = synth.quantity + 1;
-                          const updatedArray = props.foundSynths.map((total) =>
+                          const updatedArray = calculate.map((total) =>
                             total.id === synth.id
                               ? { ...total, quantity: newQuantity }
                               : total,
