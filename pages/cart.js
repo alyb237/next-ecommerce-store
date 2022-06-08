@@ -19,29 +19,38 @@ const synthInCartParent = css``;
 const synthImage = css``;
 const itemName = css``;
 const itemBrand = css``;
-const itemQuantity = css``;
+const itemTotal = css``;
 const itemPrice = css``;
+const deleteButton = css``;
 
 export default function Cart(props) {
-  const [calculate, setCalculate] = useState(props.foundSynths);
-  console.log(calculate);
+  // create a state to update the state of the quantities when + - is clicked
+  const [synthCart, setSynthCart] = useState(props.foundSynths);
 
-  const totalCounting = calculate.map((synth) => {
+  // maps through the array of objects brought in through the props
+  // extract the price and quantity information from foundSynths object - converts it to a Number
+  // multiply and return a total price
+  const totalPrice = synthCart.map((synth) => {
     const synthPrice = Number(synth.price);
     const synthCounter = Number(synth.quantity);
     const synthPriceTotal = synthPrice * synthCounter;
     return synthPriceTotal;
   });
 
+  // create add function to add total of one synth to total of the next synth to get a sum
   function add(accumulator, a) {
+    console.log(`first total: ${accumulator}`);
+    console.log(`next total: ${a}`);
+    // first total: 2000
+    // next total: 4200
     return accumulator + a;
   }
 
-  const sum = totalCounting.reduce(add, 0);
-
-  // useEffect(() => {
-  //   setCalculate(sum);
-  // }, [sum]);
+  // adding total price values in array by reducing down to one sum
+  // begins adding from first total price with 0
+  const sum = totalPrice.reduce(add, 0);
+  console.log('here is the sum', sum);
+  // after reduce : here is the sum 6200
 
   return (
     <div>
@@ -52,11 +61,11 @@ export default function Cart(props) {
       </Head>
       sum : {sum}
       <div css={contentMain}>
-        {calculate.length === 0 ? (
+        {synthCart.length === 0 ? (
           <h1>Cart is empty!</h1>
         ) : (
           <div css={synthInCartParent}>
-            {calculate.map((synth) => {
+            {synthCart.map((synth) => {
               const synthPrice = Number(synth.price);
               const synthCounter = Number(synth.quantity);
               const synthPriceTotal = synthPrice * synthCounter;
@@ -65,13 +74,18 @@ export default function Cart(props) {
                   <div css={productInfo}>
                     <Link href={`/synths/${synth.id}`}>
                       <div css={synthImage}>
-                        <img src={`/${synth.id}.jpg`} alt="synth" width="225" />
+                        <img
+                          src={`/${synth.id}.jpg`}
+                          alt="synth"
+                          width="225"
+                          cursor="default"
+                        />
                       </div>
                     </Link>
                     <p css={itemName}>{synth.name}</p>
                     <p css={itemBrand}>{synth.brand}</p>
                     <p css={itemPrice}>{synth.quantity}</p>
-                    <p css={itemQuantity}>{synthPriceTotal}</p>
+                    <p css={itemTotal}>{synthPriceTotal}</p>
 
                     <div css={quantityButtonParent}>
                       <button
@@ -80,12 +94,12 @@ export default function Cart(props) {
                           const newQuantity =
                             synth.quantity > 1 ? synth.quantity - 1 : 1;
 
-                          const updatedArray = calculate.map((total) =>
+                          const updatedArray = synthCart.map((total) =>
                             total.id === synth.id
                               ? { ...total, quantity: newQuantity }
                               : total,
                           );
-                          setCalculate(updatedArray);
+                          setSynthCart(updatedArray);
 
                           // 1. get the cookie
                           const currentCart = getParsedCookie('cart');
@@ -110,12 +124,12 @@ export default function Cart(props) {
                         css={quantityButton}
                         onClick={() => {
                           const newQuantity = synth.quantity + 1;
-                          const updatedArray = calculate.map((total) =>
+                          const updatedArray = synthCart.map((total) =>
                             total.id === synth.id
                               ? { ...total, quantity: newQuantity }
                               : total,
                           );
-                          setCalculate(updatedArray);
+                          setSynthCart(updatedArray);
                           // 1. get the cookie
                           const currentCart = getParsedCookie('cart');
                           // 2. get the synth
@@ -131,43 +145,39 @@ export default function Cart(props) {
                       >
                         +
                       </button>
+
+                      <button
+                        css={deleteButton}
+                        onClick={() => {
+                          synth.quantity = 0;
+                          const updateArray = synthCart.filter(
+                            (synthRemove) => synthRemove.quantity !== 0,
+                          );
+
+                          // 1. update the sate
+                          setSynthCart(updateArray);
+                          // 2. cookies begin
+                          const currentCart = getParsedCookie('cart');
+                          // 3. get the synth from the cookies
+                          const currentSynth = currentCart.find(
+                            (synthInCart) => synth.id === synthInCart.id,
+                          );
+                          // 4. update the quantity to 0
+                          currentSynth.quantity = 0;
+                          // 5. create new cart
+                          const updatedCart = currentCart.filter(
+                            (currentSynthInCart) =>
+                              currentSynthInCart.quantity !== 0,
+                          );
+                          // 6. set the new cookie update after deleting
+                          setStringifiedCookie('cart', updatedCart);
+                        }}
+                      >
+                        Remove
+                      </button>
                     </div>
                   </div>
                 </div>
-
-                //  <div css={priceQuantityProductInfo}>
-                //    <div css={buttons}>
-                //       <button
-                //         css={deleteButton}
-                //         onClick={() => {
-                //           synth.quantity = 0;
-                //           const updateArray = props.foundSynths.filter((synth) => synth.quantity !==0 ,
-                //           );
-                //           // update the state
-                //           setCalculate(updateArray);
-                //           // cookies begin
-                //           const currentCart = getParsedCookies('cart');
-                //           // get the synth
-                //           const currentSynth = currentCart.find((synthInCart) =>
-                //           synth.id === synthInCart.id,
-                //           );
-                //           // update the counter
-                //           currentSynth.quantity = 0;
-                //           // create new cart
-                //           const updatedCart = currentCart.filter((currentSynth) =>
-                //           currentSynth.quantity !==0 ,
-                //           );
-                //           // set the new cookie
-                //           setStringifiedCookie('cart', updatedCart);
-                //         }}
-                //         >
-                //           Remove
-                //         </button>
-                //         <p>price</p>
-                //         <p>total</p>
-                //          </div>
-                //   </div>
-                //   </div>
               );
             })}
           </div>
@@ -179,7 +189,7 @@ export default function Cart(props) {
 
 export async function getServerSideProps(context) {
   const currentCart = JSON.parse(context.req.cookies.cart || '[]');
-  console.log('checking what is in cookie cart', currentCart);
+  // console.log('checking what is in cookie cart', currentCart);
 
   // 2. get the object from the cookies in the database
 

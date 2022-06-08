@@ -84,7 +84,7 @@ export default function Synth(props) {
 export async function getServerSideProps() {
   // always have to await a promise since its an async function
   const synths = await getSynths();
-  // console.log(synths);
+  // console.log('checking to see what is in dB', synths);
   return {
     // Anything you pass in the props object
     // will get passed ot the component at the top
