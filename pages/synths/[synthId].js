@@ -134,21 +134,6 @@ export default function Synth(props) {
           >
             +
           </button>
-
-          {/* <label>
-            Quantity
-            <input
-              css={inputStyles}
-              data-test-id="product-quantity"
-              step={1}
-              type="number"
-              name="quantity"
-              min="1"
-              onChange={(e) => {
-                setIsQuantity(e.currentTarget.value);
-              }}
-            />
-          </label> */}
           <br />
           <button
             css={addButtonStyles}
@@ -178,8 +163,11 @@ export default function Synth(props) {
                     quantity: isQuantity,
                   },
                 ];
+                // sets cookie updates with updated value
                 setStringifiedCookie('cart', newCart);
-                console.log('show the cart after card added: ', newCart);
+                // sets the updated array to the state for quantity cart counter
+                props.setItemsInCookieCart(newCart);
+                // console.log('show the cart after card added: ', newCart);
               }
             }}
           >
