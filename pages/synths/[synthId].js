@@ -30,7 +30,7 @@ const addButtonStyles = css`
   outline: 0;
   grid-gap: 8px;
   align-items: center;
-  background-color: #ff90e8;
+  background-color: #a474cf;
   color: #000;
   border: 1px solid #000;
   border-radius: 3px;
@@ -154,12 +154,13 @@ export default function Synth(props) {
                 console.log('carts now', currentCart);
 
                 setStringifiedCookie('cart', currentCart);
+
+                // This shows up on the browser don't put information you don't want changed
               } else {
                 const newCart = [
                   ...currentCart,
                   {
                     id: props.synth.id,
-                    name: props.synth.synthName,
                     quantity: isQuantity,
                   },
                 ];

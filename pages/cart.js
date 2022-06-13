@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import Head from 'next/head';
 // import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { getParsedCookie, setStringifiedCookie } from '../util/cookies';
 import { getSynths } from '../util/database';
@@ -82,10 +83,10 @@ const quantityButton = css`
     outline-offset: 1px;
   }
 `;
-const quantityButtonParent = css`
-  display: flex;
-  justify-items: flex-end;
-`;
+// const quantityButtonParent = css`
+//   display: flex;
+//   justify-items: flex-end;
+// `;
 const synthImage = css`
   width: 15%;
   text-align: center;
@@ -160,6 +161,13 @@ export default function Cart(props) {
   console.log('here is the sum', sum);
   // after reduce : here is the sum 6200
 
+  // route checkout button to checkout page
+  const router = useRouter();
+  // const handleRoute = (event) => {
+  //   event.preventDefault();
+
+  // };
+
   return (
     <div css={mainDiv}>
       <Head>
@@ -203,7 +211,7 @@ export default function Cart(props) {
                     <button
                       css={quantityButton}
                       onClick={() => {
-                        console.log(synth);
+                        // console.log(synth);
                         const newQuantity =
                           synth.quantity > 1 ? synth.quantity - 1 : 1;
 
@@ -212,7 +220,7 @@ export default function Cart(props) {
                             ? { ...total, quantity: newQuantity }
                             : total,
                         );
-                        console.log('updatedArray: ', updatedArray);
+                        // console.log('updatedArray: ', updatedArray);
                         setSynthCart(updatedArray);
                         // 1. get the cookie
                         const currentCart = getParsedCookie('cart');
@@ -273,7 +281,6 @@ export default function Cart(props) {
                         const updateArray = synthCart.filter(
                           (synthRemove) => synthRemove.quantity !== 0,
                         );
-
                         // 1. update the sate
                         setSynthCart(updateArray);
                         // 2. cookies begin
@@ -303,6 +310,15 @@ export default function Cart(props) {
           </div>
         )}
       </div>
+
+      <button
+        onClick={() => {
+          router.push('/checkout').catch(() => {});
+        }}
+      >
+        Checkout
+      </button>
+      <br />
       <p css={sumStyle}>sum : {sum}</p>
     </div>
   );

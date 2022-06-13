@@ -58,8 +58,8 @@ export default function Header(props) {
     return acc + current.quantity;
   },
   0);
-  console.log('header', props.itemsInCookieCart);
-  console.log('total items in cart', totalItemsInCart);
+  // console.log('header', props.itemsInCookieCart);
+  // console.log('total items in cart', totalItemsInCart);
   return (
     <div css={headerMainStyles}>
       <header data-test-id="products-link" css={headerStyles}>
