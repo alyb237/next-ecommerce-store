@@ -17,6 +17,12 @@ const productStyles = css`
   justify-content: center;
   gap: 50px;
   height: 500px;
+  background-color: #b8c6db;
+  background-image: linear-gradient(315deg, #b8c6db 0%, #f5f7fa 74%);
+
+  .img {
+    border-radius: 300px;
+  }
 `;
 const itemStyles = css`
   font-weight: bold;

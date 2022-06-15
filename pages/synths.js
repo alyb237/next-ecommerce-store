@@ -1,15 +1,33 @@
 import { css } from '@emotion/react';
 import Head from 'next/head';
+import Image from 'next/image';
 import Link from 'next/link';
+import { Carousel } from 'react-responsive-carousel';
 import { getSynths } from '../util/database';
+
+const mainDiv = css`
+  height: 110vh;
+  /* Created with https://www.css-gradient.com */
+  background: #eef9c3;
+  background: -webkit-linear-gradient(top left, #eef9c3, #fbaaff);
+  background: -moz-linear-gradient(top left, #eef9c3, #fbaaff);
+  background: linear-gradient(bottom right, #eef9c3, #fbaaff);
+
+  h3 {
+    display: flex;
+    margin: 0%;
+    padding: 50px;
+    justify-content: center;
+    align-items: center;
+  }
+`;
 
 const synthsListStyles = css`
   display: flex;
   justify-content: center;
-  border: 1px solid;
   border-radius: 4px;
   padding: 12px 16px;
-  background: #dccbab;
+
   margin: 2px;
   /* width: 200px;
   height: 200px; */
@@ -27,34 +45,114 @@ const synthListItemStyles = css`
   background: #f3ece5;
   padding: 10px;
   border: 2px solid;
+  box-shadow: 10px 25px 25px #dbedf8;
   border-radius: 4px;
   margin: 5px;
   width: 150px;
-  height: 150px;
-`;
-
-const titleSynthStyles = css`
-  display: flex;
-  justify-content: center;
+  height: 200px;
+  text-decoration: none;
 `;
 
 const synthItem = css`
   display: flex;
   padding: 5px;
+  text-decoration: none;
 `;
+
+// const carouselDiv = css`
+//   justify-content: center;
+//   margin: 0%;
+//   padding: 0%;
+//   border-radius: 10px;
+// `;
+
+// const gradientText = css`
+//   body,
+//   html {
+//     margin: 0;
+//     padding: 0;
+//     height: 100%;
+//   }
+//   body {
+//     background: #f1f1f1;
+//     background-size: cover;
+//     font-family: 'Cabin Condensed', sans-serif;
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     align-items: center;
+//   }
+//   svg {
+//     font-weight: bold;
+//     max-width: 600px;
+//     height: 100%;
+//   }
+// `;
 
 export default function Synth(props) {
   return (
-    <div>
+    <div css={mainDiv}>
       <Head>
         <title>Synths</title>
         <meta name="description" content="List of used synthesizers" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <h3>For Sale</h3>
+      {/* <div css={gradientText}>
+        <svg viewbox="0 0 100 20">
+          <defs>
+            <linearGradient id="gradient">
+              <stop color="#000" />
+            </linearGradient>
+            <pattern
+              id="wave"
+              x="0"
+              y="-0.5"
+              width="100%"
+              height="100%"
+              patternUnits="userSpaceOnUse"
+            >
+              <path
+                id="wavePath"
+                d="M-40 9 Q-30 7 -20 9 T0 9 T20 9 T40 9 T60 9 T80 9 T100 9 T120 9 V20 H-40z"
+                mask="url(#mask)"
+                fill="url(#gradient)"
+              >
+                <animateTransform
+                  attributeName="transform"
+                  begin="0s"
+                  dur="1.5s"
+                  type="translate"
+                  from="0,0"
+                  to="40,0"
+                  repeatCount="indefinite"
+                />
+              </path>
+            </pattern>
+          </defs>
+          <text
+            textAnchor="middle"
+            x="50"
+            y="15"
+            fontSize="17"
+            fill="white"
+            fillOpacity="0.1"
+          >
+            FOR SALE
+          </text>
+          <text
+            textAnchor="middle"
+            x="50"
+            y="15"
+            fontSize="17"
+            fill="url(#wave)"
+            fillOpacity="1"
+          >
+            FOR SALE
+          </text>
+        </svg>
+      </div> */}
 
-      <div css={titleSynthStyles}>
-        <h1>List of Used Synthesizers</h1>
-      </div>
       <div css={synthsListStyles}>
         {props.synths.map((synth) => {
           return (
@@ -63,6 +161,7 @@ export default function Synth(props) {
               key={`products-${synth.id}`}
               css={synthListItemStyles}
             >
+              <img src={`/${synth.id}.jpg`} width="110" alt="synth pic" />
               <div css={synthItem}>Brand: {synth.brand}</div>
               <div css={synthItem}>
                 Name:{' '}
@@ -70,12 +169,38 @@ export default function Synth(props) {
               </div>
               <div css={synthItem}>Year: {synth.year}</div>
               <div data-test-id="product-price" css={synthItem}>
-                Price: ${synth.price}
+                Price: €{synth.price}
               </div>
             </div>
           );
         })}
       </div>
+
+      {/* <Carousel>
+        <div css={carouselDiv}>
+          <Image
+            src="/korg_ms20_pink.jpg"
+            alt="korgms20mini"
+            width="340"
+            height="220"
+          />
+        </div>
+        <div>
+          <Image src="/2.jpg" alt="cr-78" width="340" height="220" />
+        </div>
+        <div>
+          <Image src="/3.jpg" alt="minimoog-d" width="340" height="220" />
+        </div>
+        <div>
+          <Image src="/4.jpg" alt="prophet-5" width="340" height="220" />
+        </div>
+        <div>
+          <Image src="/5.jpg" alt="wave-2" width="340" height="220" />
+        </div>
+        <div>
+          <Image src="/6.jpg" alt="tr-606" width="340" height="220" />
+        </div>
+      </Carousel> */}
     </div>
   );
 }

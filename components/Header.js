@@ -5,8 +5,10 @@ import Link from 'next/link';
 
 const headerMainStyles = css`
   display: flex;
-  background: lightgrey;
-  justify-content: space-around;
+  flex-direction: row;
+  background-color: #f3e6e8;
+  background-image: linear-gradient(315deg, #f3e6e8 0%, #d5d0e5 74%);
+  justify-content: space-evenly;
 `;
 
 const headerStyles = css`
@@ -20,6 +22,7 @@ const headerStyles = css`
   > div > a {
     margin-left: 10px;
     text-decoration: none;
+    color: black;
   }
 `;
 

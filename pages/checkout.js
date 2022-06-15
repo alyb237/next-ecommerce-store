@@ -7,22 +7,38 @@ import { getSynths } from '../util/database';
 const mainContentDiv = css`
   display: flex;
   justify-content: center;
+  flex-direction: row;
+  height: 100vh;
+  background-color: #fee2f8;
+  background-image: linear-gradient(315deg, #fee2f8 0%, #dcf8ef 74%);
+
+  .headerStyles {
+    justify-content: center;
+  }
 `;
 
 const mainFormStyles = css`
-  display: flex;
+  /* display: flex; */
   justify-content: center;
+  flex-direction: column;
+  align-content: center;
+
+  .submitButtonStyles {
+    display: flex;
+    button {
+      margin: 0 auto;
+    }
+  }
 `;
 
 const divFormStyles = css`
-  display: flex;
+  /* display: flex; */
+  flex-direction: column;
   justify-content: center;
 
-  .checkoutInfo {
-    display: flex;
+  .inputStyles {
+    list-style-type: none;
     justify-content: center;
-  }
-  .submitButtonStyles {
   }
 `;
 
@@ -79,8 +95,13 @@ export default function Checkout(props) {
         <meta name="description" content="checkout" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
       <main css={mainFormStyles}>
-        <form onSubmit={handleSubmit}>
+        <div className="headerStyles">
+          <h3>Checkout</h3>
+          <h4>Please Enter Your Information</h4>
+        </div>
+        <form className="formStyles" onSubmit={handleSubmit}>
           <div css={divFormStyles}>
             <ul className="inputStyles">
               <li>
@@ -141,13 +162,6 @@ export default function Checkout(props) {
               </li>
               <li>
                 <input
-                  placeholder="country"
-                  data-test-id="checkout-country"
-                  required
-                />
-              </li>
-              <li>
-                <input
                   placeholder="credit card"
                   data-test-id="checkout-credit-card"
                   required
@@ -173,14 +187,12 @@ export default function Checkout(props) {
             </div> */}
           </div>
 
-          <div>
-            <div className="checkoutInfo">
-              <div className="submitButtonStyles">
-                <button data-test-id="checkout-confirm-order">Submit</button>
-              </div>
-              <h4>Total items in cart are: {summedQuantity}</h4>
-              <h3>Total sum is {sum}</h3>
+          <div className="checkoutInfo">
+            <div className="submitButtonStyles">
+              <button data-test-id="checkout-confirm-order">Submit</button>
             </div>
+            <h4>Total items in cart are: {summedQuantity}</h4>
+            <h3>Total sum is: {sum}</h3>
           </div>
         </form>
       </main>

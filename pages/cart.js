@@ -7,40 +7,74 @@ import { useState } from 'react';
 import { getParsedCookie, setStringifiedCookie } from '../util/cookies';
 import { getSynths } from '../util/database';
 
-const mainDiv = css`
+const mainSection = css`
   margin: 0;
   padding: 0;
-  background: linear-gradient(to bottom right, #e3f0ff, #fafcff);
-  height: 200vh;
+  /* margin-bottom: 20%; */
+  padding-top: 2%;
+  background: linear-gradient(to bottom right, #dbedf8, #ebdbf8);
+  height: 100vh;
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
+  flex-direction: column;
+
+  .titleStyle {
+    // display: flex;
+    /* height: 5vh; */
+    align-items: center;
+    padding: 0;
+    margin: 0;
+  }
 `;
 
 const contentMain = css`
   display: flex;
-  width: 80%;
-  height: 95%;
-  background-color: white;
+  width: 70%;
+  /* height: 75%; */
+  /* margin: 50px; */
+  background-color: #f3e6e8;
+  background-image: linear-gradient(315deg, #f3e6e8 0%, #d5d0e5 74%);
   border-radius: 20px;
-  box-shadow: 0px 25px 40px #1687d933;
-`;
+  box-shadow: 0px 25px 40px #dbedf8;
 
-const cartTitle = css`
-  display: flex;
-  justify-content: flex-start;
-`;
+  .hr {
+    &:before,
+    &:after {
+      height: 6px;
+      filter: blur(5px);
+      border-radius: 5px;
+    }
 
-const productInfo = css`
-  display: flex;
-  width: 130%;
-  height: 60%;
-  justify-content: space-between;
-  align-items: center;
-  padding: 4px;
+    &:before {
+      background: linear-gradient(to right, blue, pink);
+    }
+
+    &:after {
+      background: linear-gradient(to left, blue, pink);
+    }
+  }
+
+  .columnsDiv {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 10%;
+    padding: 20px;
+  }
+
+  .productInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px;
+  }
+  .imgDiv {
+    width: 15%;
+  }
 
   .synthName {
-    width: 150px;
+    width: 50px;
     font-weight: 800;
     color: #202020;
   }
@@ -50,22 +84,31 @@ const productInfo = css`
     color: #909090;
   }
 
-  .synthQuantity {
+  .synthPrice {
     width: 50px;
     justify-content: flex-start;
   }
+
+  .emptyCartStyle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+  }
 `;
+
 const quantityButton = css`
   outline: 0;
   grid-gap: 8px;
   align-items: center;
-  background: 0 0;
+  background: #e7e7e7;
   border: 1px solid #000;
   border-radius: 4px;
   cursor: pointer;
   display: inline-flex;
   flex-shrink: 0;
-  font-size: 8px;
+  font-size: 12px;
   gap: 8px;
   justify-content: center;
   line-height: 1.5;
@@ -83,14 +126,7 @@ const quantityButton = css`
     outline-offset: 1px;
   }
 `;
-// const quantityButtonParent = css`
-//   display: flex;
-//   justify-items: flex-end;
-// `;
-const synthImage = css`
-  width: 15%;
-  text-align: center;
-`;
+
 const deleteButton = css`
   padding: 50px;
   outline: 0;
@@ -102,8 +138,9 @@ const deleteButton = css`
   border-radius: 4px;
   cursor: pointer;
   display: inline-flex;
+  justify-content: center;
   flex-shrink: 0;
-  font-size: 16px;
+  font-size: 12px;
   gap: 8px;
   justify-content: center;
   line-height: 1.5;
@@ -121,12 +158,52 @@ const deleteButton = css`
     outline-offset: 1px;
   }
 `;
+const checkoutButtonStyles = css`
+  outline: 0;
+  grid-gap: 8px;
+  align-items: center;
+  background-color: #f7fe8f;
+  color: #000;
+  border: 1px solid #000;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  flex-shrink: 0;
+  font-size: 16px;
+  font-weight: bold;
+  width: 15%;
+  gap: 8px;
+  justify-content: center;
+
+  line-height: 1.5;
+  overflow: hidden;
+  padding: 12px 16px;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  transition: all 0.14s ease-out;
+  white-space: nowrap;
+  :hover {
+    box-shadow: 4px 4px 0 #000;
+    transform: translate(-4px, -4px);
+  }
+  :focus-visible {
+    outline-offset: 1px;
+  }
+`;
+
+const checkoutButtonDiv = css`
+  display: flex;
+  justify-content: flex-end;
+`;
 
 const quantityNumStyles = css`
   padding: 10px;
 `;
 const sumStyle = css`
   display: flex;
+  justify-content: flex-end;
+  font-weight: 900;
+  margin-top: 10px;
 `;
 
 export default function Cart(props) {
@@ -169,27 +246,29 @@ export default function Cart(props) {
   // };
 
   return (
-    <div css={mainDiv}>
+    <>
       <Head>
         <title>Cart</title>
         <meta name="description" content="cart" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <h3 css={cartTitle}>Shopping Cart</h3>
-      <div css={contentMain}>
-        {synthCart.length === 0 ? (
-          <h1>Cart is empty!</h1>
-        ) : (
-          <div>
-            {synthCart.map((synth) => {
-              const synthPrice = Number(synth.price);
-              const synthCounter = Number(synth.quantity);
-              const synthPriceTotal = synthPrice * synthCounter;
-              return (
-                <div key={`synthCart-${synth.id}`}>
-                  <div css={productInfo}>
+      <section css={mainSection}>
+        <div className="titleStyle">
+          <h3 style={{ padding: 0, marginTop: 0 }}>Shopping Cart</h3>
+        </div>
+        <div css={contentMain}>
+          {synthCart.length === 0 ? (
+            <h1 className="emptyCartStyle">Cart is empty!</h1>
+          ) : (
+            <div className="columnsDiv">
+              {synthCart.map((synth) => {
+                const synthPrice = Number(synth.price);
+                const synthCounter = Number(synth.quantity);
+                const synthPriceTotal = synthPrice * synthCounter;
+                return (
+                  <div className="productInfo" key={`synthCart-${synth.id}`}>
                     <Link href={`/synths/${synth.id}`}>
-                      <div css={synthImage}>
+                      <div className="imageDiv">
                         <img
                           src={`/${synth.id}.jpg`}
                           alt="synth"
@@ -204,9 +283,9 @@ export default function Cart(props) {
                     <div className="synthName">
                       <p>{synth.name}</p>
                     </div>
-                    {/* <div className="synthName">
-                      <p className="synthQuantity">{synth.quantity}</p>
-                    </div> */}
+                    <div className="synthName">
+                      <p className="synthPrice">€{synth.price}</p>
+                    </div>
 
                     <button
                       css={quantityButton}
@@ -242,7 +321,9 @@ export default function Cart(props) {
                       -
                     </button>
                     <div css={quantityNumStyles}>
-                      <span>{synth.quantity}</span>
+                      <span data-test-id={`cart-product-quantity-${synth.id}`}>
+                        {synth.quantity}
+                      </span>
                     </div>
                     <button
                       css={quantityButton}
@@ -274,6 +355,7 @@ export default function Cart(props) {
                     <br />
                     <br />
                     <button
+                      data-test-id={`cart-product-remove-${synth.id}`}
                       css={deleteButton}
                       onClick={() => {
                         synth.quantity = 0;
@@ -301,26 +383,32 @@ export default function Cart(props) {
                         setStringifiedCookie('cart', updatedCart);
                       }}
                     >
-                      Remove
+                      x
                     </button>
                   </div>
-                </div>
-              );
-            })}
-          </div>
-        )}
-      </div>
-
-      <button
-        onClick={() => {
-          router.push('/checkout').catch(() => {});
-        }}
-      >
-        Checkout
-      </button>
-      <br />
-      <p css={sumStyle}>sum : {sum}</p>
-    </div>
+                );
+              })}
+              <br />
+              <hr size="2px" width="100%" color="#B1B1AD" />
+              <div css={sumStyle}>
+                <p data-test-id="cart-total">Total: €{sum}</p>
+              </div>
+              <div css={checkoutButtonDiv}>
+                <button
+                  css={checkoutButtonStyles}
+                  data-test-id="cart-checkout"
+                  onClick={() => {
+                    router.push('/checkout').catch(() => {});
+                  }}
+                >
+                  Checkout
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+    </>
   );
 }
 
