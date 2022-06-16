@@ -11,10 +11,10 @@ const mainDiv = css`
   width: 100vw;
 
   /* Created with https://www.css-gradient.com */
-  background: #ff81c7;
-  background: -webkit-linear-gradient(top left, #ff81c7, #635ded);
-  background: -moz-linear-gradient(top left, #ff81c7, #635ded);
-  background: linear-gradient(bottom right, #ff81c7, #635ded);
+  background: #f4b2f6;
+  background: -webkit-linear-gradient(top left, #f4b2f6, #a6f0ff);
+  background: -moz-linear-gradient(top left, #f4b2f6, #a6f0ff);
+  background: linear-gradient(to bottom right, #f4b2f6, #a6f0ff);
 
   .sectionWrapper {
     display: flex;

@@ -73,6 +73,11 @@ const contentMain = css`
     width: 15%;
   }
 
+  .imgBorder {
+    border: 2px solid #fce9fa;
+    border-radius: 4px;
+  }
+
   .synthName {
     width: 50px;
     font-weight: 800;
@@ -275,6 +280,7 @@ export default function Cart(props) {
                           alt="synth"
                           width="110"
                           cursor="default"
+                          className="imgBorder"
                         />
                       </div>
                     </Link>

@@ -1,5 +1,4 @@
-// import Footer from './Footer';
-
+import Footer from './Footer';
 import Header from './Header';
 
 export default function Layout(props) {
@@ -10,6 +9,7 @@ export default function Layout(props) {
         setItemsInCookieCart={props.setItemsInCookieCart}
       />
       {props.children}
+      <Footer />{' '}
     </div>
   );
 }

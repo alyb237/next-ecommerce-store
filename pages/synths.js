@@ -57,6 +57,21 @@ const synthItem = css`
   display: flex;
   padding: 5px;
   text-decoration: none;
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
+`;
+
+const imgStyles = css`
+  /* border: 1px solid #fce9fa; */
+  border-radius: 4px;
+
+  .imgBorder {
+    border: 2px solid #fce9fa;
+    border-radius: 4px;
+  }
 `;
 
 // const carouselDiv = css`
@@ -98,61 +113,6 @@ export default function Synth(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <h3>For Sale</h3>
-      {/* <div css={gradientText}>
-        <svg viewbox="0 0 100 20">
-          <defs>
-            <linearGradient id="gradient">
-              <stop color="#000" />
-            </linearGradient>
-            <pattern
-              id="wave"
-              x="0"
-              y="-0.5"
-              width="100%"
-              height="100%"
-              patternUnits="userSpaceOnUse"
-            >
-              <path
-                id="wavePath"
-                d="M-40 9 Q-30 7 -20 9 T0 9 T20 9 T40 9 T60 9 T80 9 T100 9 T120 9 V20 H-40z"
-                mask="url(#mask)"
-                fill="url(#gradient)"
-              >
-                <animateTransform
-                  attributeName="transform"
-                  begin="0s"
-                  dur="1.5s"
-                  type="translate"
-                  from="0,0"
-                  to="40,0"
-                  repeatCount="indefinite"
-                />
-              </path>
-            </pattern>
-          </defs>
-          <text
-            textAnchor="middle"
-            x="50"
-            y="15"
-            fontSize="17"
-            fill="white"
-            fillOpacity="0.1"
-          >
-            FOR SALE
-          </text>
-          <text
-            textAnchor="middle"
-            x="50"
-            y="15"
-            fontSize="17"
-            fill="url(#wave)"
-            fillOpacity="1"
-          >
-            FOR SALE
-          </text>
-        </svg>
-      </div> */}
-
       <div css={synthsListStyles}>
         {props.synths.map((synth) => {
           return (
@@ -161,7 +121,14 @@ export default function Synth(props) {
               key={`products-${synth.id}`}
               css={synthListItemStyles}
             >
-              <img src={`/${synth.id}.jpg`} width="110" alt="synth pic" />
+              <div css={imgStyles}>
+                <img
+                  src={`/${synth.id}.jpg`}
+                  width="110"
+                  alt="synth pic"
+                  className="imgBorder"
+                />
+              </div>
               <div css={synthItem}>Brand: {synth.brand}</div>
               <div css={synthItem}>
                 Name:{' '}
