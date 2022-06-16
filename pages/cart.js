@@ -225,8 +225,8 @@ export default function Cart(props) {
 
   // create add function to add total of one synth to total of the next synth to get a sum
   function add(accumulator, a) {
-    console.log(`first total: ${accumulator}`);
-    console.log(`next total: ${a}`);
+    // console.log(`first total: ${accumulator}`);
+    // console.log(`next total: ${a}`);
     // first total: 2000
     // next total: 4200
     return accumulator + a;
@@ -235,7 +235,7 @@ export default function Cart(props) {
   // adding total price values in array by reducing down to one sum
   // begins adding from first total price with 0
   const sum = totalPrice.reduce(add, 0);
-  console.log('here is the sum', sum);
+  // console.log('here is the sum', sum);
   // after reduce : here is the sum 6200
 
   // route checkout button to checkout page
@@ -265,6 +265,7 @@ export default function Cart(props) {
                 const synthPrice = Number(synth.price);
                 const synthCounter = Number(synth.quantity);
                 const synthPriceTotal = synthPrice * synthCounter;
+                console.log('price total in cart', synthPriceTotal);
                 return (
                   <div className="productInfo" key={`synthCart-${synth.id}`}>
                     <Link href={`/synths/${synth.id}`}>

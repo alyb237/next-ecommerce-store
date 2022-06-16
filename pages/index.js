@@ -16,9 +16,17 @@ const mainDiv = css`
   background: -moz-linear-gradient(top left, #ff81c7, #635ded);
   background: linear-gradient(bottom right, #ff81c7, #635ded);
 
+  .sectionWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
   .heroImgContainer {
     display: flex;
     justify-content: center;
+    align-items: center;
     /* width: 50%; */
     padding: 20px;
     img {
@@ -31,18 +39,20 @@ const mainDiv = css`
 const heroStyles = css`
   display: flex;
   justify-content: center;
-  align-content: center;
+  align-items: center;
   flex-direction: row;
   flex-wrap: wrap;
 
   .heroTextContainer {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-content: center;
+    align-items: center;
     width: 50%;
     padding: 10px;
     p {
       justify-content: center;
-      align-content: center;
+      align-items: center;
       border: 1px black solid;
       border-radius: 100px;
       margin: 0 auto;
@@ -152,6 +162,8 @@ const vectroStyle = css`
 `;
 
 const textStyles = css`
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-content: center;
   flex-direction: row;
@@ -166,53 +178,54 @@ export default function Home() {
         <meta name="description" content="My Home page" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <main css={mainDiv}>
-        <div css={vectroStyle}>
-          <h1 className="vectro">
-            <span className="vectro-body">Synthtronics</span>
-            <span className="vectro-red">I</span>
-            <span className="vectro-green">I</span>
-            <span className="vectro-blue">I</span>
-          </h1>
-        </div>
-        <div css={heroStyles}>
-          <div className="heroTextContainer">
-            <h1>The Vintage Synth Perfectionist</h1>
-            <h2>VINTAGE SYNTHS THAT WORK LIKE NEW</h2>
-            <div css={textStyles}>
-              Synthtronics takes great pride in providing the most discerning
-              musicians and producers worldwide with the finest vintage
-              synthesizers and classic electronic musical instruments available
-              anywhere.
-              <br />
-              <br />
-              We are detail-oriented perfectionists who meticulously refurbish
-              vintage gear to work like new again, if not better. With over 10
-              years in the business, you can trust us with all your electronic
-              music studio needs.
-              <br />
-              <br />
-              We buy, repair, sell and trade vintage synths and recording studio
-              gear and look forward to working with you!
-            </div>
-            <br />
-            <br />
-            <Link href="/synths">
-              <p>Check out our used synthesizers </p>
-            </Link>
+      <section className="sectionWrapper">
+        <main css={mainDiv}>
+          <div css={vectroStyle}>
+            <h1 className="vectro">
+              <span className="vectro-body">Synthtronics</span>
+              <span className="vectro-red">I</span>
+              <span className="vectro-green">I</span>
+              <span className="vectro-blue">I</span>
+            </h1>
           </div>
-        </div>
-        <div className="heroImgContainer">
-          <Image
-            src="/microkorg.jpg"
-            alt="microkorg"
-            width="320"
-            height="210"
-            priority
-          />
-        </div>
-      </main>
+          <div css={heroStyles}>
+            <div className="heroTextContainer">
+              <h1>The Vintage Synth Perfectionist</h1>
+              <h2>VINTAGE SYNTHS THAT WORK LIKE NEW</h2>
+              <div css={textStyles}>
+                Synthtronics takes great pride in providing the most discerning
+                musicians and producers worldwide with the finest vintage
+                synthesizers and classic electronic musical instruments
+                available anywhere.
+                <br />
+                <br />
+                We are detail-oriented perfectionists who meticulously refurbish
+                vintage gear to work like new again, if not better. With over 10
+                years in the business, you can trust us with all your electronic
+                music studio needs.
+                <br />
+                <br />
+                We buy, repair, sell and trade vintage synths and recording
+                studio gear and look forward to working with you!
+              </div>
+              <br />
+              <br />
+              <Link href="/synths">
+                <p>Check out our used synthesizers </p>
+              </Link>
+            </div>
+          </div>
+          <div className="heroImgContainer">
+            <Image
+              src="/microkorg.jpg"
+              alt="microkorg"
+              width="320"
+              height="210"
+              priority
+            />
+          </div>
+        </main>
+      </section>
     </div>
   );
 }
