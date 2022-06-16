@@ -16,12 +16,18 @@ const productStyles = css`
   align-items: center;
   justify-content: center;
   gap: 50px;
-  height: 500px;
+  height: 100vh;
   background-color: #b8c6db;
   background-image: linear-gradient(315deg, #b8c6db 0%, #f5f7fa 74%);
 
-  .img {
-    border-radius: 300px;
+  .imgStyles {
+    display: flex;
+    padding: 5px;
+
+    .image {
+      border-radius: 50px;
+      border: 3px solid #fce9fa;
+    }
   }
 `;
 const itemStyles = css`
@@ -96,8 +102,13 @@ export default function Synth(props) {
 
   return (
     <div css={productStyles}>
-      <div>
-        <img src={`/${props.synth.id}.jpg`} width="450" alt="synth pic" />
+      <div className="imgStyles">
+        <img
+          className="image"
+          src={`/${props.synth.id}.jpg`}
+          width="450"
+          alt="synth pic"
+        />
       </div>
       <div css={textStyles}>
         <div>

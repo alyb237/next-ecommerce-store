@@ -7,38 +7,93 @@ import { getSynths } from '../util/database';
 const mainContentDiv = css`
   display: flex;
   justify-content: center;
-  flex-direction: row;
+  flex-direction: column;
   height: 100vh;
   background-color: #fee2f8;
   background-image: linear-gradient(315deg, #fee2f8 0%, #dcf8ef 74%);
 
-  .headerStyles {
+  .contentWrapper {
+    display: flex;
     justify-content: center;
   }
 `;
 
 const mainFormStyles = css`
-  /* display: flex; */
+  display: flex;
   justify-content: center;
   flex-direction: column;
-  align-content: center;
 
-  .submitButtonStyles {
+  .headerStyles {
+    margin: 0px;
     display: flex;
-    button {
-      margin: 0 auto;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    .checkoutHStyles {
+      margin: 10px;
     }
+    .infoStyles {
+      margin: 4px;
+    }
+  }
+
+  .checkoutInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: -5px;
+  }
+
+  .cartStyles {
+    margin: 8px;
+  }
+  .sumStyles {
+    margin: 4px;
+  }
+`;
+
+const buttonStyles = css`
+  outline: 0;
+  grid-gap: 8px;
+  align-items: center;
+  background-color: #fce9fa;
+  color: #000;
+  border: 1px solid #000;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  flex-shrink: 0;
+  font-size: 16px;
+  gap: 8px;
+  justify-content: center;
+  line-height: 1.5;
+  overflow: hidden;
+  padding: 6px 8px;
+  width: 50%;
+
+  text-decoration: none;
+  text-overflow: ellipsis;
+  transition: all 0.14s ease-out;
+  white-space: nowrap;
+  :hover {
+    box-shadow: 4px 4px 0 #000;
+    transform: translate(-4px, -4px);
+  }
+  :focus-visible {
+    outline-offset: 1px;
   }
 `;
 
 const divFormStyles = css`
-  /* display: flex; */
+  display: flex;
   flex-direction: column;
   justify-content: center;
 
   .inputStyles {
-    list-style-type: none;
-    justify-content: center;
+    list-style-type: '🎹';
+    align-content: space-around;
   }
 `;
 
@@ -95,107 +150,108 @@ export default function Checkout(props) {
         <meta name="description" content="checkout" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <main css={mainFormStyles}>
-        <div className="headerStyles">
-          <h3>Checkout</h3>
-          <h4>Please Enter Your Information</h4>
-        </div>
-        <form className="formStyles" onSubmit={handleSubmit}>
-          <div css={divFormStyles}>
-            <ul className="inputStyles">
-              <li>
-                <input
-                  placeholder="first name"
-                  data-test-id="checkout-first-name"
-                  required
-                />
-              </li>
-              <li>
-                <input
-                  placeholder="last name"
-                  data-test-id="checkout-last-name"
-                  required
-                />
-              </li>
-              <li>
-                <input
-                  placeholder="email"
-                  data-test-id="checkout-email"
-                  required
-                />
-              </li>
-              <li>
-                <input
-                  placeholder="address"
-                  data-test-id="checkout-address"
-                  required
-                />
-              </li>
-              <li>
-                <input
-                  placeholder="city"
-                  data-test-id="checkout-city"
-                  required
-                />
-              </li>
-              <li>
-                <input
-                  placeholder="email"
-                  data-test-id="checkout-email"
-                  required
-                />
-              </li>
-              <li>
-                <input
-                  placeholder="postal code"
-                  data-test-id="checkout-postal-code"
-                  required
-                />
-              </li>
-              <li>
-                <input
-                  placeholder="country"
-                  data-test-id="checkout-country"
-                  required
-                />
-              </li>
-              <li>
-                <input
-                  placeholder="credit card"
-                  data-test-id="checkout-credit-card"
-                  required
-                />
-              </li>
-              <li>
-                <input
-                  placeholder="expiration-date"
-                  data-test-id="checkout-expiration-date"
-                  required
-                />
-              </li>
-              <li>
-                <input
-                  placeholder="security code"
-                  data-test-id="checkout-security-code"
-                  required
-                />
-              </li>
-            </ul>
-            {/* <div className="submitButtonStyles">
+      <section className="contentWrapper">
+        <main css={mainFormStyles}>
+          <div className="headerStyles">
+            <h3 className="checkoutHStyles">Checkout</h3>
+            <h4 className="infoStyles">Please Enter Your Information</h4>
+          </div>
+          <form className="formStyles" onSubmit={handleSubmit}>
+            <div css={divFormStyles}>
+              <ul className="inputStyles">
+                <li>
+                  <input
+                    placeholder="first name"
+                    data-test-id="checkout-first-name"
+                    required
+                  />
+                </li>
+                <li>
+                  <input
+                    placeholder="last name"
+                    data-test-id="checkout-last-name"
+                    required
+                  />
+                </li>
+                <li>
+                  <input
+                    placeholder="email"
+                    data-test-id="checkout-email"
+                    required
+                  />
+                </li>
+                <li>
+                  <input
+                    placeholder="address"
+                    data-test-id="checkout-address"
+                    required
+                  />
+                </li>
+                <li>
+                  <input
+                    placeholder="city"
+                    data-test-id="checkout-city"
+                    required
+                  />
+                </li>
+                <li>
+                  <input
+                    placeholder="email"
+                    data-test-id="checkout-email"
+                    required
+                  />
+                </li>
+                <li>
+                  <input
+                    placeholder="postal code"
+                    data-test-id="checkout-postal-code"
+                    required
+                  />
+                </li>
+                <li>
+                  <input
+                    placeholder="country"
+                    data-test-id="checkout-country"
+                    required
+                  />
+                </li>
+                <li>
+                  <input
+                    placeholder="credit card"
+                    data-test-id="checkout-credit-card"
+                    required
+                  />
+                </li>
+                <li>
+                  <input
+                    placeholder="expiration-date"
+                    data-test-id="checkout-expiration-date"
+                    required
+                  />
+                </li>
+                <li>
+                  <input
+                    placeholder="security code"
+                    data-test-id="checkout-security-code"
+                    required
+                  />
+                </li>
+              </ul>
+              {/* <div className="submitButtonStyles">
               <button data-test-id="checkout-confirm-order">Submit</button>
             </div> */}
-          </div>
-
-          <div className="checkoutInfo">
-            <div className="submitButtonStyles">
-              <button data-test-id="checkout-confirm-order">Submit</button>
             </div>
-            <h4>Total items in cart are: {summedQuantity}</h4>
-            <h3>Total sum is: {sum}</h3>
-          </div>
-        </form>
-      </main>
+
+            <div className="checkoutInfo">
+              <button css={buttonStyles}>Submit</button>
+              <h4 className="cartStyles">
+                Total items in cart are: {summedQuantity}
+              </h4>
+              <h3 className="sumStyles">Total sum is: {sum}</h3>
+            </div>
+          </form>
+        </main>
+      </section>
     </div>
   );
 }

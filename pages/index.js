@@ -14,7 +14,7 @@ const mainDiv = css`
   background: #ff81c7;
   background: -webkit-linear-gradient(top left, #ff81c7, #635ded);
   background: -moz-linear-gradient(top left, #ff81c7, #635ded);
-  background: linear-gradient(to bottom right, #ff81c7, #635ded);
+  background: linear-gradient(bottom right, #ff81c7, #635ded);
 
   .heroImgContainer {
     display: flex;
