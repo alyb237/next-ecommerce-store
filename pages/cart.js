@@ -259,7 +259,7 @@ export default function Cart(props) {
       </Head>
       <section css={mainSection}>
         <div className="titleStyle">
-          <h3 style={{ padding: 0, marginTop: 0 }}>Shopping Cart</h3>
+          <h1 style={{ padding: 0, marginTop: 0 }}>Shopping Cart</h1>
         </div>
         <div css={contentMain}>
           {synthCart.length === 0 ? (
@@ -272,7 +272,11 @@ export default function Cart(props) {
                 const synthPriceTotal = synthPrice * synthCounter;
                 console.log('price total in cart', synthPriceTotal);
                 return (
-                  <div className="productInfo" key={`synthCart-${synth.id}`}>
+                  <div
+                    data-test-id={`cart-product-${synth.id}`}
+                    className="productInfo"
+                    key={`synthCart-${synth.id}`}
+                  >
                     <Link href={`/synths/${synth.id}`}>
                       <div className="imageDiv">
                         <img
@@ -293,7 +297,7 @@ export default function Cart(props) {
                     <div className="synthName">
                       <p className="synthPrice">€{synth.price}</p>
                     </div>
-
+                    {/* <h1>{synth.name}</h1> */}
                     <button
                       css={quantityButton}
                       onClick={() => {

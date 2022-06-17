@@ -2,7 +2,7 @@ import { css, Global } from '@emotion/react';
 import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
-import { getParsedCookie, setStringifiedCookie } from '../util/cookies';
+import { getParsedCookie } from '../util/cookies';
 
 export default function MyApp({ Component, pageProps }) {
   // useEffect for header cart

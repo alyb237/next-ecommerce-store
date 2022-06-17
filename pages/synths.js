@@ -1,8 +1,6 @@
 import { css } from '@emotion/react';
 import Head from 'next/head';
-import Image from 'next/image';
 import Link from 'next/link';
-import { Carousel } from 'react-responsive-carousel';
 import { getSynths } from '../util/database';
 
 const mainDiv = css`
@@ -13,7 +11,7 @@ const mainDiv = css`
   background: -moz-linear-gradient(top left, #eef9c3, #fbaaff);
   background: linear-gradient(bottom right, #eef9c3, #fbaaff);
 
-  h3 {
+  h1 {
     display: flex;
     margin: 0%;
     padding: 50px;
@@ -112,7 +110,7 @@ export default function Synth(props) {
         <meta name="description" content="List of used synthesizers" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <h3>For Sale</h3>
+      <h1>For Sale</h1>
       <div css={synthsListStyles}>
         {props.synths.map((synth) => {
           return (

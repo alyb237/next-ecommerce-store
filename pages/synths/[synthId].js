@@ -68,23 +68,23 @@ const addButtonStyles = css`
   }
 `;
 
-const inputStyles = css`
-  border: 3px solid #000;
-  border-radius: 5px;
-  height: 50px;
-  line-height: normal;
-  color: #282828;
-  display: block;
-  width: 25%;
-  box-sizing: border-box;
-  user-select: auto;
-  font-size: 16px;
-  padding: 0 6px;
-  padding-left: 12px;
-  :focus {
-    border: 3px solid #5551ff;
-  }
-`;
+// const inputStyles = css`
+//   border: 3px solid #000;
+//   border-radius: 5px;
+//   height: 50px;
+//   line-height: normal;
+//   color: #282828;
+//   display: block;
+//   width: 25%;
+//   box-sizing: border-box;
+//   user-select: auto;
+//   font-size: 16px;
+//   padding: 0 6px;
+//   padding-left: 12px;
+//   :focus {
+//     border: 3px solid #5551ff;
+//   }
+// `;
 
 const userInputStyles = css`
   display: flex;
@@ -102,19 +102,23 @@ export default function Synth(props) {
 
   return (
     <div css={productStyles}>
+      <h1>Synths!</h1>
       <div className="imgStyles">
         <img
           className="image"
           src={`/${props.synth.id}.jpg`}
           width="450"
           alt="synth pic"
+          data-test-id="product-image"
         />
       </div>
       <div css={textStyles}>
         <div>
           <div css={itemStyles}>Brand: {props.synth.brand}</div>
           <div css={itemStyles}>Year: {props.synth.year}</div>
-          <div css={itemStyles}>Price: {props.synth.price} €</div>
+          <div data-test-id="product-price" css={itemStyles}>
+            Price: {props.synth.price} €
+          </div>
         </div>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -128,6 +132,7 @@ export default function Synth(props) {
         <br />
         <div css={userInputStyles}>
           <button
+            data-test-id="product-quantity"
             type="button"
             css={quantityButton}
             onClick={() => {
@@ -143,6 +148,7 @@ export default function Synth(props) {
           <span>{isQuantity}</span>
 
           <button
+            data-test-id="product-quantity"
             type="button"
             css={quantityButton}
             onClick={() => {
@@ -153,6 +159,7 @@ export default function Synth(props) {
           </button>
           <br />
           <button
+            data-test-id="product-add-to-cart"
             css={addButtonStyles}
             onClick={() => {
               const currentCart = getParsedCookie('cart')
@@ -204,7 +211,7 @@ export async function getServerSideProps(context) {
 
   // 1. get the value of the cookie from the request object ..sometimes it's undefined or empty array
   const currentCart = JSON.parse(context.req.cookies.cart || '[]');
-  // console.log(currentCart);
+  console.log(currentCart);
   // // 2. get the id from the url and use it to the match the single synth id
   // const allSynths = await getSynths();
   // const singleSynth = allSynths.find((synth) => {

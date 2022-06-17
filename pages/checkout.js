@@ -244,7 +244,7 @@ export default function Checkout(props) {
 
             <div className="checkoutInfo">
               <button data-test-id="checkout-confirm-order" css={buttonStyles}>
-                Submit
+                Confirm Order
               </button>
               <h4 className="cartStyles">
                 Total items in cart are: {summedQuantity}
