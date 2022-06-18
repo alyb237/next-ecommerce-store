@@ -125,13 +125,13 @@ export default function Checkout(props) {
     const synthCounterTwo = Number(synthQuantity.quantity);
     return synthCounterTwo;
   });
-  console.log('total quantity in cart is', totalQuantity);
+  // console.log('total quantity in cart is', totalQuantity);
 
   function addQ(acc, b) {
     return acc + b;
   }
   const summedQuantity = totalQuantity.reduce(addQ, 0);
-  console.log(summedQuantity);
+  // console.log(summedQuantity);
 
   // use router function to reroute to thank you page on click of the submit button
   const router = useRouter();
@@ -237,9 +237,6 @@ export default function Checkout(props) {
                   />
                 </li>
               </ul>
-              {/* <div className="submitButtonStyles">
-              <button data-test-id="checkout-confirm-order">Submit</button>
-            </div> */}
             </div>
 
             <div className="checkoutInfo">
@@ -249,7 +246,7 @@ export default function Checkout(props) {
               <h4 className="cartStyles">
                 Total items in cart are: {summedQuantity}
               </h4>
-              <h3 className="sumStyles">Total sum is: {sum}</h3>
+              <h3 className="sumStyles">Total sum is: €{sum}</h3>
             </div>
           </form>
         </main>
