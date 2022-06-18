@@ -3,6 +3,14 @@ import Link from 'next/link';
 
 // import { Layout } from '../pages/cart';
 
+// Props is an Array of objects
+type Props = {
+  itemsInCookieCart: {
+    id: number;
+    quantity: number;
+  }[];
+};
+
 const headerMainStyles = css`
   display: flex;
   justify-content: space-between;
@@ -29,32 +37,6 @@ const headerMainStyles = css`
     cursor: pointer;
   }
 `;
-
-// const headerStyles = css`
-//   //width: 600px;
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: space-evenly;
-//   padding: 10px 14px;
-//   border-radius: 4px;
-
-//   // justify-content: space-evenly;
-
-//   > div > a {
-//     margin-left: 10px;
-//     text-decoration: none;
-//     list-style-type: none;
-//     color: black;
-//   }
-// `;
-
-// Props is an Array of objects, therefore the "[]"
-type Props = {
-  itemsInCookieCart: {
-    id: number;
-    quantity: number;
-  }[];
-};
 
 export default function Header(props: Props) {
   // console.log('items before reduce', props.itemsInCookieCart);
