@@ -1,5 +1,16 @@
-# Next.js Example - Spring 2022
+## e-commerce store(mock up): selling used and vintage synthesizers 🎛 🎹
+___________________________________________
+### Description: Adding products to a cart and checking out using cookies. 
+___________________________________________
+#### Functionalities: create separated util functions to get and set localStorage that abstract the JSON.stringify / parse process, useEffect is needed to update the component, Retrieving cookies on the server-side in Next.js via `req.cookies`, psql: Inserting records into the table, Connecting to that database from Node.js, Next.js: Querying data from the database, Using same packages as Node.js, Normalizing fields into JS properties with sindresorhus/camelcase-keys, Querying all synths,Querying a single synth, Next.js: Refactoring the database connection to fix Next.js connection slots issue, Changing extension to .ts and .tsx, Usage with Emotion - add the jsxImportSource , Typing props, Typing useState - hovering to get original type of setter function, Typing events, Typing API handlers, including response and request, Typing database functions, Testing with Playwright, Selecting elements, Asserting that elements exist, Interacting with elements, Setting up automatic screenshots and videos on test failure, Testing synth pages, Usage of data-test-id, GitHub Actions, Deployment with Heroku, REST, API Design, HTTP Request and Response, Response Status Codes (200, 301, 302, 307, 308, 401, 403, 404, 500), Next.js API Routes (TS), TypeScript types for API handlers, including response and request, Setting up API routes connected to the database functions, Fetching from those API routes, `fetch` on Next.js server-side needs API_BASE_URL environment variable, Creation of frontend components to trigger Create, Update and Delete actions such as the delete from cart button. 
+___________________________________________
+#### Libraries: 
+[Postgres.js library](https://www.npmjs.com/package/postgres)
+[dotenv-safe library](https://www.npmjs.com/package/dotenv-safe)
+[cameCase](https://www.npmjs.com/package/camelcase-keys)
 
+####Technologies
+--------------------
 - Next.js
 - Postgres.js
 - Jest
