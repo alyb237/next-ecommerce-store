@@ -72,35 +72,7 @@ const imgStyles = css`
   }
 `;
 
-// const carouselDiv = css`
-//   justify-content: center;
-//   margin: 0%;
-//   padding: 0%;
-//   border-radius: 10px;
-// `;
 
-// const gradientText = css`
-//   body,
-//   html {
-//     margin: 0;
-//     padding: 0;
-//     height: 100%;
-//   }
-//   body {
-//     background: #f1f1f1;
-//     background-size: cover;
-//     font-family: 'Cabin Condensed', sans-serif;
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: center;
-//     align-items: center;
-//   }
-//   svg {
-//     font-weight: bold;
-//     max-width: 600px;
-//     height: 100%;
-//   }
-// `;
 
 export default function Synth(props) {
   return (
@@ -141,48 +113,17 @@ export default function Synth(props) {
         })}
       </div>
 
-      {/* <Carousel>
-        <div css={carouselDiv}>
-          <Image
-            src="/korg_ms20_pink.jpg"
-            alt="korgms20mini"
-            width="340"
-            height="220"
-          />
-        </div>
-        <div>
-          <Image src="/2.jpg" alt="cr-78" width="340" height="220" />
-        </div>
-        <div>
-          <Image src="/3.jpg" alt="minimoog-d" width="340" height="220" />
-        </div>
-        <div>
-          <Image src="/4.jpg" alt="prophet-5" width="340" height="220" />
-        </div>
-        <div>
-          <Image src="/5.jpg" alt="wave-2" width="340" height="220" />
-        </div>
-        <div>
-          <Image src="/6.jpg" alt="tr-606" width="340" height="220" />
-        </div>
-      </Carousel> */}
+
     </div>
   );
 }
-// Anything in getServerSideProps runs in
-// Node.js (on the server)
+
 export async function getServerSideProps() {
-  // always have to await a promise since its an async function
+
   const synths = await getSynths();
-  // console.log('checking to see what is in dB', synths);
+
   return {
-    // Anything you pass in the props object
-    // will get passed ot the component at the top
-    // in the props parameter in the function.
-    // when database is imported all info is sent to props
-    // taking the server import { getSynths } from './../util/database';
-    // side only database and sent it via props (node.js)
-    // gSSP only in pages directory
+
     props: {
       synths: synths,
     },

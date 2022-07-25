@@ -430,9 +430,7 @@ export async function getServerSideProps(context) {
   // 2. get the object from the cookies in the database
 
   const allSynths = await getSynths();
-  // const singleSynth = allSynths.filter((synth) => {
-  //        return allSynths.id = currentCart.[synth].id;
-  // });
+
   // create array to store found synths in cookies
   const foundSynths = [];
 
@@ -459,12 +457,3 @@ export async function getServerSideProps(context) {
     },
   };
 }
-
-// export function Header(props) {
-//   // count the items inside of the array
-
-//   const cartCounter = props.synthCart.reduce((acc, item) => {
-//     return acc + item.cartCounter;
-//   }, 0);
-//   return <nav>{cartCounter}</nav>;
-// }

@@ -1,15 +1,7 @@
-// import { useRouter } from 'next/router';
-// useRouter is slow its only good in the front end
-
 import { css } from '@emotion/react';
-// import { GetServerSidePropsContext } from 'next';
-// import Cookies from 'js-cookie';
-// import Image from 'next/image';
 import { useState } from 'react';
 import { getParsedCookie, setStringifiedCookie } from '../../util/cookies';
 import { getSynth } from '../../util/database';
-
-// [synthId] becomes the variable that will be accessible
 
 const productStyles = css`
   display: flex;
@@ -68,24 +60,6 @@ const addButtonStyles = css`
   }
 `;
 
-// const inputStyles = css`
-//   border: 3px solid #000;
-//   border-radius: 5px;
-//   height: 50px;
-//   line-height: normal;
-//   color: #282828;
-//   display: block;
-//   width: 25%;
-//   box-sizing: border-box;
-//   user-select: auto;
-//   font-size: 16px;
-//   padding: 0 6px;
-//   padding-left: 12px;
-//   :focus {
-//     border: 3px solid #5551ff;
-//   }
-// `;
-
 const userInputStyles = css`
   display: flex;
   justify-content: space-evenly;
@@ -94,7 +68,6 @@ const quantityButton = css``;
 
 export default function Synth(props) {
   const [isQuantity, setIsQuantity] = useState(1);
-  // console.log(isQuantity);
 
   if (!props.synth) {
     return <div>Item not listed</div>;
@@ -102,7 +75,6 @@ export default function Synth(props) {
 
   return (
     <div css={productStyles}>
-      <h1>Synths!</h1>
       <div className="imgStyles">
         <img
           className="image"
@@ -174,12 +146,9 @@ export default function Synth(props) {
                 currentSynthInCart.quantity =
                   Number(currentSynthInCart.quantity) + Number(isQuantity);
 
-                // console.log('item is already in cart', quantity);
                 console.log('carts now', currentCart);
 
                 setStringifiedCookie('cart', currentCart);
-
-                // This shows up on the browser don't put information you don't want changed
               } else {
                 const newCart = [
                   ...currentCart,
@@ -192,7 +161,6 @@ export default function Synth(props) {
                 setStringifiedCookie('cart', newCart);
                 // sets the updated array to the state for quantity cart counter
                 props.setItemsInCookieCart(newCart);
-                // console.log('show the cart after card added: ', newCart);
               }
             }}
           >
@@ -211,29 +179,9 @@ export async function getServerSideProps(context) {
 
   // 1. get the value of the cookie from the request object ..sometimes it's undefined or empty array
   const currentCart = JSON.parse(context.req.cookies.cart || '[]');
-  console.log(currentCart);
-  // // 2. get the id from the url and use it to the match the single synth id
-  // const allSynths = await getSynths();
-  // const singleSynth = allSynths.find((synth) => {
-  //   return synth.id === context.query.synthId;
-  // });
-
-  // if (!singleSynth) {
-  //   context.res.statusCode = 404;
-  // }
 
   const synthData = await getSynth(context.query.synthId);
 
-  // 3. find the object that represents the synth in the url
-  // const currentSynthInCart = currentCart.find(
-  //   (synthInCart) => singleSynth.id === synthInCart.id,
-  // );
-
-  // console.log('current synth in cart', currentSynthInCart);
-
-  // // 4. create a new object adding the properties from the cookie object to the synth in the database
-  // const newObjSynth = { ...singleSynth, ...currentSynthInCart };
-  // console.log(newObjSynth);
   return {
     props: {
       synth: synthData,
