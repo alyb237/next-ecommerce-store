@@ -75,6 +75,7 @@ export default function Synth(props) {
 
   return (
     <div css={productStyles}>
+      <h1>Synths!</h1>
       <div className="imgStyles">
         <img
           className="image"
