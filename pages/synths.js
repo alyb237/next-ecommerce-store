@@ -49,6 +49,10 @@ const synthListItemStyles = css`
   width: 150px;
   height: 200px;
   text-decoration: none;
+
+  a {
+    text-decoration: underline;
+  }
 `;
 
 const synthItem = css`
@@ -71,8 +75,6 @@ const imgStyles = css`
     border-radius: 4px;
   }
 `;
-
-
 
 export default function Synth(props) {
   return (
@@ -112,18 +114,14 @@ export default function Synth(props) {
           );
         })}
       </div>
-
-
     </div>
   );
 }
 
 export async function getServerSideProps() {
-
   const synths = await getSynths();
 
   return {
-
     props: {
       synths: synths,
     },
